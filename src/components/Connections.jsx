@@ -32,7 +32,7 @@ const Connections = () => {
   }
 
   if (connection.length === 0) {
-    return <h1 className="text-center text-xl font-semibold mt-10">No connection found</h1>;
+    return <h1 className="text-center text-3xl font-bold my-10">No connection found</h1>;
   }
 
   return (

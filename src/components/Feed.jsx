@@ -1,41 +1,41 @@
-import axios from 'axios'
-import React, { useEffect } from 'react'
-import { BASE_URL } from '../utils/constant'
-import { useDispatch, useSelector } from 'react-redux'
-import { addFeed } from '../utils/feedSlice'
-import UserCard from './userCard'
-
-
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { BASE_URL } from '../utils/constant';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFeed } from '../utils/feedSlice';
+import UserCard from './UserCard';
 
 const Feed = () => {
-
   const dispatch = useDispatch();
-  const feed = useSelector(store => store.feed || []);
-  console.log(feed);
- 
+  const feed = useSelector((store) => store.feed || []);
 
   const getFeed = async () => {
-    if(feed.length > 0)return;
-    try{
-      const res = await axios.get(BASE_URL + "/feed" , {withCredentials : true})
-      
-      dispatch(addFeed(res?.data));
+    if (Array.isArray(feed) && feed.length > 0) return;
+    try {
+      const res = await axios.get(`${BASE_URL}/feed`, { withCredentials: true });
+      if (res?.data) {
+        dispatch(addFeed(res.data));
+      }
+    } catch (err) {
+      console.error("Error fetching feed:", err);
     }
-    catch(err){
-      console.log(err);
-    }
-  }
+  };
 
   useEffect(() => {
     getFeed();
-  } , [])
+  }, [feed]); 
+
+  if(!feed)return;
+
+  if(feed.length <= 0){
+    return <h1 className='flex justify-center items-center font-bold mt-10 text-3xl mb-10'>Now new users found</h1>
+  }
 
   return (
-    <div>
-     {feed && feed.map((feedVal) => <UserCard data={feedVal} />)}
-
+    <div className='my-10'>
+      {Array.isArray(feed) && feed.length > 0 && <UserCard data={feed[0]} />}
     </div>
   );
-}
+};
 
-export default Feed
+export default Feed;
