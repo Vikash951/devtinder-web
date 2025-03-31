@@ -20,8 +20,9 @@ const Body = () => {
   const fetchUser = async () => {
     if(userData)return;
     try{
-      const user = await axios.get(BASE_URL + "/profile/view" , {withCredentials : true});
-      dispatch(addUser(user));
+      const res = await axios.get(BASE_URL + "/profile/view" , {withCredentials : true});
+      console.log(res);
+      dispatch(addUser(res?.data?.user));
     }
     catch(err){
       if(err.status === 401){

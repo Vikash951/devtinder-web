@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addFeed } from '../utils/feedSlice';
 import UserCard from './UserCard';
 
+
 const Feed = () => {
   const dispatch = useDispatch();
   const feed = useSelector((store) => store.feed || []);
@@ -28,12 +29,12 @@ const Feed = () => {
   if(!feed)return;
 
   if(feed.length <= 0){
-    return <h1 className='flex justify-center items-center font-bold mt-10 text-3xl mb-10'>Now new users found</h1>
+    return <h1 className='flex justify-center items-center font-bold mt-10 text-3xl mb-10'>No new users found</h1>
   }
 
   return (
     <div className='my-10'>
-      {Array.isArray(feed) && feed.length > 0 && <UserCard data={feed[0]} />}
+      {Array.isArray(feed) && feed.length > 0 && <UserCard data={feed[0]} btnshow={true} />}
     </div>
   );
 };

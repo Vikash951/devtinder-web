@@ -3,7 +3,7 @@ import { BASE_URL } from "../utils/constant";
 import { useDispatch } from "react-redux";
 import { removeUserFromFeed } from "../utils/feedSlice";
 
-const UserCard = ({data})=>{
+const UserCard = ({data , btnshow})=>{
     const {_id , firstName , lastName , photoUrl , gender , age , skills , about} = data;
     const dispatch = useDispatch();
 
@@ -21,18 +21,18 @@ const UserCard = ({data})=>{
             <figure className=" ">
                 <img className="w-50 h-50 rounded-lg"
                 src= {photoUrl}
-                alt="Shoes" />
+                alt="user-image" />
             </figure>
             <div className="flex flex-col justify-center items-center m-2">
                 <h2 className="card-title">{firstName + " " + lastName}</h2>
                 <h2><span className="font-bold my-1">About: </span>{about}</h2>
                 <h2><span className="font-bold my-1">Skills: </span> {skills}</h2>
-                <span className="font-bold">{gender}, {age}</span>
+                <span className="font-bold">{gender}  {age}</span>
             </div>
-            <div className="flex gap-3 justify-center  ">
+            {btnshow && <div className="flex gap-3 justify-center  ">
                 <button className="bg-blue-600 p-2 rounded m-2" onClick={() => handleSendRequest("ignored" , _id)}>Ignore</button>
                 <button className="bg-pink-600 p-2 rounded m-2" onClick={() => handleSendRequest("interested" , _id)}>Interested</button>
-            </div>
+            </div>}
         </div>
     )
 }

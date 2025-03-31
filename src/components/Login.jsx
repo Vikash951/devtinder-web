@@ -21,10 +21,8 @@ const Login = () => {
     const handleLogin = async () =>  {
         try{
             const res = await axios.post(BASE_URL + "/login" , {emailId , password} , {withCredentials : true});
-
-            const userData = { ...res.data }; 
            
-            dispatch(addUser(userData));
+            dispatch(addUser(res.data));
             navigate("/");
         }
         catch(err){
