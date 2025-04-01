@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { BASE_URL } from "../utils/constant";
-import UserCard from "./userCard";
+import UserCard from "./UserCard";
 
 const EditProfile = ({ user }) => {
   const [error, setError] = useState("");
