@@ -9,7 +9,11 @@ const UserCard = ({data , btnshow})=>{
 
     const handleSendRequest = async (status , userId) => {
         try{
-            await axios.post(BASE_URL + "/request/send/" + status + "/" + userId , {} , {withCredentials:true});
+            const res = await axios.post(BASE_URL + "/request/send/" + status + "/" + userId , {} , {withCredentials:true});
+            const url = `${BASE_URL}/request/send/${status}/${userId}`;
+            console.log("Request URL:", url);
+
+            console.log(res);
             dispatch(removeUserFromFeed(userId));
         }
         catch(err){
