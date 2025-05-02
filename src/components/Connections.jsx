@@ -3,6 +3,7 @@ import { BASE_URL } from "../utils/constant";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
+import { Link } from "react-router";
 
 const Connections = () => {
   const connection = useSelector((store) => store.connections);
@@ -38,13 +39,15 @@ const Connections = () => {
   return (
     <div className="text-center my-10 px-4">
       <h1 className="font-bold text-3xl mb-6">Connections</h1>
+      
       <div className="flex flex-col items-center gap-8">
         {connection.map((connect) => {
-          const { firstName, lastName, photoUrl, about , age , gender } = connect;
-          console.log(connect);
+         
+          const { _id ,firstName, lastName, photoUrl, about , age , gender } = connect;
+          
 
           return (
-            <div key={firstName} className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center border border-gray-200 hover:shadow-xl transition-shadow w-full max-w-md">
+            <div key={_id} className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center border border-gray-200 hover:shadow-xl transition-shadow w-full max-w-md">
               <img
                 className="w-24 h-24 rounded-full border-4 border-gray-300 object-cover"
                 src={photoUrl}
@@ -53,6 +56,12 @@ const Connections = () => {
               <h2 className="mt-4 text-xl font-semibold">{firstName + " " + lastName}</h2>
               {age && gender && <p className="mt-2">{age + " " + gender}</p>}
               <p className="text-gray-600 text-sm mt-2 text-center px-4">{about}</p>
+              <Link to={"/chat/" + _id}>
+                <button className="p-2 mt-4 bg-blue-500 rounded-lg text-white px-4 flex">
+                  Chat
+                </button>
+              </Link>
+              
             </div>
           );
         })}

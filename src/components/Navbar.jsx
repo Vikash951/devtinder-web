@@ -32,7 +32,7 @@ const Navbar =  ()=>{
 
     return (<div className="navbar bg-base-300 shadow-sm">
         <div className="flex-1">
-            <Link to = "/" className="btn btn-ghost text-xl">DevTinder</Link>
+            <Link to = "/" className="btn btn-ghost text-xl">Go Developer</Link>
         </div>
 
         {user && <div className="flex gap-2">
